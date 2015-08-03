@@ -5,13 +5,10 @@
   "scripts": {
     "start": "node ./bin/www"
   },
-<<<<<<< HEAD
-=======
   "engines": {
     "node": "0.10.x",
     "npm": "1.4.x"
   },
->>>>>>> a864154454dc15974cb14a73b6bfefd5bf43b58b
   "devDependencies": {
     "sqlite3": "~3.0.4"
   },
@@ -26,10 +23,6 @@
     "express-partials": "~0.3.0",
     "sequelize": "~2.0.0",
     "pg": "~4.1.1",
-<<<<<<< HEAD
     "pg-hstore": "~2.3.2"
-=======
-	"pg-hstore": "2.3.2"
->>>>>>> a864154454dc15974cb14a73b6bfefd5bf43b58b
   }
 }
