@@ -1,4 +1,11 @@
-
+<form method="get" action="quizes">
+  <label for="preg" class="rem">Término:</label>
+  <input type="text" id="term" name="search" value=""/>
+          <button type="submit">
+            Buscar
+          </button>
+        </form>
+<br/>
 <table>
   <% var i; for (i=0; i < quizes.length; i++) { %>        
     <tr>
@@ -15,4 +22,5 @@
   <% } %>
 </table>
 <p/>
+<br/>
 <a href="/quizes/new"><button>Crear pregunta</button></a>
