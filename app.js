@@ -1,3 +1,4 @@
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -18,6 +19,7 @@ app.set('view engine', 'ejs');
 
 app.use(partials());
 // uncomment after placing your favicon in /public
+// app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -31,8 +33,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Helpers dinamicos:
 app.use(function(req, res, next) {
 
+  // si no existe lo inicializa
+  if (!req.session.redir) {
+    req.session.redir = '/';
+  }
   // guardar path en session.redir para despues de login
-  if (!req.path.match(/\/login|\/logout/)) {
+  if (!req.path.match(/\/login|\/logout|\/user/)) {
     req.session.redir = req.path;
   }
 
@@ -40,7 +46,6 @@ app.use(function(req, res, next) {
   res.locals.session = req.session;
   next();
 });
-
 
 app.use('/', routes);
 
@@ -61,7 +66,7 @@ if (app.get('env') === 'development') {
         res.render('error', {
             message: err.message,
             error: err,
-	    errors: []
+            errors: []
         });
     });
 }
@@ -73,7 +78,7 @@ app.use(function(err, req, res, next) {
     res.render('error', {
         message: err.message,
         error: {},
-	errors: []
+        errors: []
     });
 });
 
