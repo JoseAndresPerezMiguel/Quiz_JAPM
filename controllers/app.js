@@ -30,6 +30,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Helpers dinamicos:
 app.use(function(req, res, next) {
 
+  // guarda en cada transacción la hora del reloj del sistema
+  if (req.session.user){
+    var currentDate = new Date().getTime();
+    var sessionDate = req.session.lastAction;
+    // si la hora guardada es de hace mas de 2 minutos, se cancela la sesión y se redirige al login
+    if (sessionDate && (currentDate - 2*60000) > sessionDate ){
+      delete req.session.user;
+      res.redirect("/login");
+    }
+    req.session.lastAction = currentDate;
+  }
+  else {
+    req.session.lastAction = null;
+  }
+  
   // guardar path en session.redir para despues de login
   if (!req.path.match(/\/login|\/logout/)) {
     req.session.redir = req.path;
